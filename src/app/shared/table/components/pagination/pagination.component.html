@@ -1,0 +1,32 @@
+<div class="pagination">
+  <div class="pagination_actions">
+    @if(paginationData$ | async; as paginationData) {
+    <mat-form-field>
+      <mat-select
+        (selectionChange)="changePageSize($event)"
+        [value]="selectedPageSize"
+      >
+        @for (pageSize of pageSizeList; track pageSize) {
+        <mat-option [value]="pageSize" selected>{{ pageSize }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    <mat-icon
+      fontIcon="first_page"
+      (click)="changePageURL(paginationData.firstPageURL)"
+    ></mat-icon>
+    <mat-icon
+      fontIcon="chevron_left"
+      (click)="changePageURL(paginationData.prevPageURL)"
+    ></mat-icon>
+    <mat-icon
+      fontIcon="chevron_right"
+      (click)="changePageURL(paginationData.nextPageURL)"
+    ></mat-icon>
+    <mat-icon
+      fontIcon="last_page"
+      (click)="changePageURL(paginationData.lastPageURL)"
+    ></mat-icon>
+    }
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.issues-list {
+  width: 80vw;
+  max-height: 90vh;
+  overflow: hidden;
+
+  &_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &-title {
+      margin-left: 16px;
+
+      &-close {
+        margin: 16px;
+        cursor: pointer;
+      }
+    }
+  }
+}

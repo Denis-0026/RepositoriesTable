@@ -1,0 +1,42 @@
+<table
+  matSort
+  (matSortChange)="setCurrentSort($event)"
+  class="repositories-table"
+>
+  <tr class="repositories-table_header">
+    <th mat-sort-header="full_name" class="repositories-table_header-item">
+      Название
+    </th>
+    <th class="repositories-table_header-item">Язык</th>
+    <th mat-sort-header="pushed" class="repositories-table_header-item">
+      Дата последнего Push
+    </th>
+    <th class="repositories-table_header-item">Архивный</th>
+    <th class="repositories-table_header-item">Ссылка</th>
+  </tr>
+
+  <div class="repositories-table_body">
+    @if(loading$ | async) {
+    <div class="repositories-table_body-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+    } @else { @for (element of data$ | async; track element) {
+    <tr
+      class="repositories-table_body-row"
+      (click)="selectRow(element)"
+      (dblclick)="openDialog(element)"
+      [ngClass]="{ selected_row: checkSelectedRow(element) }"
+    >
+      <td class="repositories-table_body-row-item">{{ element.full_name }}</td>
+      <td class="repositories-table_body-row-item">{{ element.language }}</td>
+      <td class="repositories-table_body-row-item">
+        {{ element.pushed | date : "d, MMMM, y, h:mm a" }}
+      </td>
+      <td class="repositories-table_body-row-item">{{ element.archived }}</td>
+      <td class="repositories-table_body-row-item">
+        <a [href]="element.url" target="_blank">{{ element.url }}</a>
+      </td>
+    </tr>
+    } }
+  </div>
+</table>

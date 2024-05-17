@@ -1,0 +1,25 @@
+<div class="issues-list">
+  <div class="issues-list_header">
+    <div class="issues-list_header-title">
+      <h2 mat-dialog-title>{{ data.name }}</h2>
+    </div>
+    <div class="issues-list_header-title-close">
+      <mat-icon fontIcon="close" mat-dialog-close></mat-icon>
+    </div>
+  </div>
+  <mat-dialog-content>
+    <app-issues-list-table
+      [data$]="issuesList$"
+      [loading$]="loading$"
+      [selectedRows$]="selectedRows$"
+      (selectedRow)="setSelectedRows($event)"
+    ></app-issues-list-table>
+    <div>
+      <app-pagination
+        [paginationData$]="paginationData$"
+        (currentPageURL)="setCurrentPageURL($event)"
+        (currentPageSize)="setCurrentPageSize($event)"
+      ></app-pagination>
+    </div>
+  </mat-dialog-content>
+</div>

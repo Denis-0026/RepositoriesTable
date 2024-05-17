@@ -1,0 +1,27 @@
+<table matSort (matSortChange)="setCurrentSort($event)" class="issues-table">
+  <tr class="issues-table_header">
+    <th class="issues-table_header-item">Заголовок</th>
+    <th class="issues-table_header-item">Текст</th>
+    <th class="issues-table_header-item">Дата создания</th>
+  </tr>
+
+  <div class="issues-table_body">
+    @if(loading$ | async) {
+    <div class="issues-table_body-loader">
+      <mat-spinner></mat-spinner>
+    </div>
+    } @else { @for (element of data$ | async; track element) {
+    <tr
+      class="issues-table_body-row"
+      (click)="selectRow(element)"
+      [ngClass]="{ selected_row: checkSelectedRow(element) }"
+    >
+      <td class="issues-table_body-row-item">{{ element.title }}</td>
+      <td class="issues-table_body-row-item">{{ element.body }}</td>
+      <td class="issues-table_body-row-item">
+        {{ element.created_at | date : "h, mm a, d, MMMM, y" }}
+      </td>
+    </tr>
+    } }
+  </div>
+</table>

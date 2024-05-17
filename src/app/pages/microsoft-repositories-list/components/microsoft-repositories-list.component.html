@@ -1,0 +1,21 @@
+<div class="repositories-list">
+  <div class="repositories-list_title">
+    <p>Список репозиториев</p>
+  </div>
+  <div class="repositories-list_table">
+    <app-microsoft-repositories-list-table
+      [data$]="microsoftRepositoriesList$"
+      [loading$]="loading$"
+      [selectedRows$]="selectedRows$"
+      (currentSort)="setCurrentSort($event)"
+      (selectedRow)="setSelectedRows($event)"
+    ></app-microsoft-repositories-list-table>
+  </div>
+  <div>
+    <app-pagination
+      [paginationData$]="paginationData$"
+      (currentPageURL)="setCurrentPageURL($event)"
+      (currentPageSize)="setCurrentPageSize($event)"
+    ></app-pagination>
+  </div>
+</div>
